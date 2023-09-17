@@ -1,0 +1,66 @@
+{
+  "nodes": {
+    "dotfiles": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1694749050,
+        "narHash": "sha256-i0dZbPSgPByuPeV3T0wBn/2t+mn5Y5CUbm9nMRa8Gno=",
+        "owner": "OnigiriByte",
+        "repo": "dotfiles",
+        "rev": "1d38690a1a6a828ad499af2e543b1f6a3290004d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "OnigiriByte",
+        "repo": "dotfiles",
+        "type": "github"
+      }
+    },
+    "home-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1694465129,
+        "narHash": "sha256-8BQiuobMrCfCbGM7w6Snx+OBYdtTIm0+cGVaKwQ5BFg=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "9787dffff5d315c9593d3f9fb0f9bf2097e1b57b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "ref": "release-23.05",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1694753796,
+        "narHash": "sha256-QPE7dqcicQH/nq9aywVXJWWtci4FvxHaM+BSIEbGBvA=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "360a7d31c30abefdc490d203f80e3221b7a24af2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-23.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "dotfiles": "dotfiles",
+        "home-manager": "home-manager",
+        "nixpkgs": "nixpkgs"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
