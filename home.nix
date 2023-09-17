@@ -124,25 +124,34 @@ in
 
   xdg.configFile = {
     "qtile" = {
-      source = "${userHome}"/dotfiles/qtile;
+      source = "${userHome}/dotfiles/qtile";
 # recursive = true;
       target = "qtile/";
     };
 
     "rofi" = {
-      source = "${userHome}"/dotfiles/rofi;
+      source = "${userHome}/dotfiles/rofi";
       target = "rofi/";
     };
 
-    "nvim" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${userHome}"/dotfiles/nvim;
-# recursive = true;
-    };
-  };
+     "nvim" = {
+       source = config.lib.file.mkOutOfStoreSymlink "${userHome}/dotfiles/nvim";
+ # recursive = true;
+     };
+   };
 
   home.file = {
     ".wezterm.lua" = {
       source = /home/onigiribyte/dotfiles/.wezterm.lua;
     };
   };
+
+
+  home.file = {
+    ".xinitrc" = {
+      source = /home/onigiribyte/dotfiles/.xinitrc;
+    };
+  };
+
+
 }

@@ -1,54 +1,38 @@
 {
-  description = "OnigiriByte's Flake Config";
+  description = "A very basic flake";
 
   inputs = {
-    nixpkgs.url = github:nixos/nixpkgs/nixos-23.05;
+    # Specify the source of Home Manager and Nixpkgs.
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
     home-manager = {
-      url = github:nix-community/home-manager/release-23.05;
+      url = "github:nix-community/home-manager/release-23.05";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # dotfiles.url = "github:OnigiriByte/dotfiles"
-    dotfiles = {
-        url = "github:OnigiriByte/dotfiles";
-        flake = false;
     };
   };
 
-  outputs = inputs@{self, nixpkgs, home-manager,  ... }:
-  let
-    username = "onigiribyte";
-    system = "x86_64-linux";
-    # pkgs = nixpkgs.legacyPackages.${system};
-    pkgs = import nixpkgs {
-        inherit system;
-        config = {
-            allowUnfree = true;
-        };
-    };
+  outputs = inputs@{ self, nixpkgs, home-manager, ... }: let
+  	system = "x86_64-linux";
+	# pkgs = nixpkgs.legacyPackages.${system};
+	pkgs = import nixpkgs {
+	inherit system;
+	config.allowUnfree = true;
+	};
 
-    lib = nixpkgs.lib;
   in
   {
-    nixosConfigurations = {
-      "nixos" = nixpkgs.lib.nixosSystem {
-        inherit system;
-        # specialArgs = attrs;
-        modules = [
-          ./nixos/configuration.nix
-        ];
-      };
-    };
+  	nixosConfigurations = {
+	nixos = nixpkgs.lib.nixosSystem {
+	inherit system;
+	modules = [./configuration.nix];
+	};
+	};
 
-    homeConfigurations = {
-        ${username} = home-manager.lib.homeManagerConfiguration {
-            inherit system pkgs;
-            homeDirectory = "/home/${username}";
-            inherit username;
-            modules = [
-                ./home-manager/home.nix
-            ];
-        };
-    };
+	homeConfigurations = {
+onigiribyte = home-manager.lib.homeManagerConfiguration {
+	inherit pkgs;
+	extraSpecialArgs = inputs;
+	modules = [./home.nix];
+};
+	};
   };
 }
