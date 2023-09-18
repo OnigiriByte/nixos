@@ -1,9 +1,10 @@
-{ config, pkgs, ... }:
+{ config, pkgs,pkgs-stable, lib, ... }:
 
 
 let
 user = "onigiribyte";
-userHome = "/home/${user}";
+# userHome = "/home/${user}";
+userHome =config.home.homeDirectory;
 in
 {
 # Home Manager needs a bit of information about you and the paths it should
@@ -37,21 +38,36 @@ in
 # # Adds the 'hello' command to your environment. It prints a friendly
 # # "Hello, world!" when run.
 # pkgs.hello
+          discord
 
-    bun
-      go
-      unzip
-      nodejs_18
-      zoxide
-      fzf
-      xclip
-      cht-sh
-      bat
-      discord
-      gcc
-      zig
+#INFO: Langs
+      bun 
+          go
+          nodejs_18
+          gcc
+          # rustup
+          rustc
+          cargo
+          zig
 
-      (pkgs.rofi.override { plugins = [ pkgs.rofi-emoji ]; })
+#INFO: Archive utils
+          zip
+          xz
+          unzip
+          p7zip
+
+#INFO: utils
+          fzf
+          ripgrep
+          aria2
+          jq
+          zoxide
+          bat
+          xclip
+          cht-sh
+          glow
+
+          (pkgs.rofi.override { plugins = [ pkgs.rofi-emoji ]; })
 
 # # It is sometimes useful to fine-tune packages, for example, by applying
 # # overrides. You can do that directly here, just don't forget the
@@ -66,7 +82,7 @@ in
 # (pkgs.writeShellScriptBin "my-hello" ''
 #   echo "Hello, ${config.home.username}!"
 # '')
-      ];
+          ];
 
 # Home Manager is pretty good at managing dotfiles. The primary way to manage
 # plain files is through 'home.file'.
@@ -119,9 +135,30 @@ in
     package = pkgs.brave;
     extensions = [
     {id = "gfbliohnnapiefjpjlpjnehglfpaknnc";}
+    {id = "nngceckbapebfimnlniiiahkandclblb";}
     ];
   };
 
+
+xresources.properties = {
+    "Xcursor.size" = 32;
+};
+
+programs.git = {
+    enable = true;
+    userName = "OnigiriByte";
+    userEmail = "OnigiriByte@proton.me";
+    # diff-so-fancy = {
+    #     enable = true;
+    # };
+
+    difftastic = {
+        enable = true;
+
+    };
+};
+
+# NOTE: Dotfiles linking
   xdg.configFile = {
     "qtile" = {
       source = "${userHome}/dotfiles/qtile";

@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config,lib, pkgs, ... }:
+{ config,lib, pkgs, pkgs-stable, ... }:
 
 let 
 user = "onigiribyte";
@@ -73,7 +73,6 @@ in
 # List packages installed in system profile. To search, run:
 # $ nix search wget
     environment.systemPackages = with pkgs; [
-        qtile
             wget
 	    curl
             brave
@@ -158,6 +157,7 @@ in
                 qtile = {
                     enable = true;
                     backend = "x11";
+                    package = pkgs-stable.qtile;
                 };
             };
             displayManager = {
